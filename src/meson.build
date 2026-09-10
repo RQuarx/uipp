@@ -1,0 +1,1 @@
+src = files('window.cc', 'draw_list.cc', 'surface.cc')

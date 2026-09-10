@@ -1,0 +1,4 @@
+option('build-shared', type: 'boolean', value: true)
+option('build-static', type: 'boolean', value: false)
+
+option('build-test', type: 'boolean', value: false)
