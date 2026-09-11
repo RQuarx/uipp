@@ -4,6 +4,7 @@
 
 #include "uipp/color.hh"
 #include "uipp/draw_list.hh"
+#include "uipp/export.hh"
 
 
 namespace uipp
@@ -11,10 +12,10 @@ namespace uipp
     using texture_id = std::uint32_t;
 
 
-    class surface
+    class [[uipp_public]] surface
     {
     public:
-        struct backend
+        struct [[uipp_public]] backend
         {
             virtual ~backend() = default;
 

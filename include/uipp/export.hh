@@ -8,7 +8,7 @@
 #        else
 #            define uipp_public msvc::dllimport
 #        endif
-#    elif
+#    else
 #        define uipp_public gnu::visibility("default")
 #    endif
 #else

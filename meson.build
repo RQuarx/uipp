@@ -7,6 +7,7 @@ cxx = meson.get_compiler('cpp')
 
 compile_args = [ '-DUIPP_BUILDING' ]
 include_dirs = include_directories('include')
+dependencies = []
 
 subdir('include/uipp')
 subdir('src')
@@ -16,8 +17,9 @@ built_lib = get_option('default_library')
 library = library(meson.project_name(), src,
                   gnu_symbol_visibility: 'hidden',
                   include_directories:   include_dirs,
-                  cpp_args:              compile_args,
                   cpp_shared_args:       compile_args + ['-DUIPP_SHARED'],
+                  cpp_args:              compile_args,
+                  dependencies:          dependencies,
                   version:               meson.project_version(),
                   install:               true)
 

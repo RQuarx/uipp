@@ -1,0 +1,1 @@
+traits_headers = files('platform.hh', 'renderer.hh')

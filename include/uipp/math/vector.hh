@@ -26,7 +26,7 @@ namespace uipp::math
 
 
     template <arithmetic_type T>
-    struct tvec2
+    struct [[uipp_public]] tvec2
     {
         using size_type  = std::size_t;
         using value_type = T;
@@ -34,11 +34,11 @@ namespace uipp::math
 
         union
         {
-            T x, r, s;
+            T x, r, s, w;
         };
         union
         {
-            T y, g, t;
+            T y, g, t, h;
         };
 
 
@@ -65,7 +65,7 @@ namespace uipp::math
 
 
     template <arithmetic_type T>
-    struct tvec3
+    struct [[uipp_public]] tvec3
     {
         union
         {
@@ -106,7 +106,7 @@ namespace uipp::math
 
 
     template <arithmetic_type T>
-    struct tvec4
+    struct [[uipp_public]] tvec4
     {
         union
         {
@@ -168,6 +168,7 @@ namespace uipp::math
 
 
     template <vector_like T>
+    [[uipp_public]]
     auto operator+=(T &a, const T &b) -> T &
     {
         for (typename T::size_type i = 0; i < T::length(); i++) a.at(i) += b.at(i);
@@ -175,6 +176,7 @@ namespace uipp::math
     }
 
     template <vector_like T>
+    [[uipp_public]]
     auto operator-=(T &a, const T &b) -> T &
     {
         for (typename T::size_type i = 0; i < T::length(); i++) a.at(i) -= b.at(i);
@@ -182,6 +184,7 @@ namespace uipp::math
     }
 
     template <vector_like T>
+    [[uipp_public]]
     auto operator*=(T &a, typename T::value_type s) -> T &
     {
         for (typename T::size_type i = 0; i < T::length(); i++) a.at(i) *= s;
@@ -189,6 +192,7 @@ namespace uipp::math
     }
 
     template <vector_like T>
+    [[uipp_public]]
     auto operator/=(T &a, typename T::value_type s) -> T &
     {
         for (typename T::size_type i = 0; i < T::length(); i++) a.at(i) /= s;
@@ -196,6 +200,7 @@ namespace uipp::math
     }
 
     template <vector_like T>
+    [[uipp_public]]
     auto operator+(T a, const T &b) -> T
     {
         a += b;
@@ -203,6 +208,7 @@ namespace uipp::math
     }
 
     template <vector_like T>
+    [[uipp_public]]
     auto operator-(T a, const T &b) -> T
     {
         a -= b;
@@ -210,6 +216,7 @@ namespace uipp::math
     }
 
     template <vector_like T>
+    [[uipp_public]]
     auto operator*(T a, typename T::value_type s) -> T
     {
         a *= s;
@@ -217,6 +224,7 @@ namespace uipp::math
     }
 
     template <vector_like T>
+    [[uipp_public]]
     auto operator*(typename T::value_type s, T a) -> T
     {
         a *= s;
@@ -224,6 +232,7 @@ namespace uipp::math
     }
 
     template <vector_like T>
+    [[uipp_public]]
     auto operator/(T a, typename T::value_type s) -> T
     {
         a /= s;
@@ -231,6 +240,7 @@ namespace uipp::math
     }
 
     template <vector_like T>
+    [[uipp_public]]
     auto operator-(const T &v) -> T
     {
         T out;
@@ -239,6 +249,7 @@ namespace uipp::math
     }
 
     template <vector_like T>
+    [[uipp_public]]
     auto operator==(const T &a, const T &b) -> bool
     {
         for (typename T::size_type i = 0; i < T::length(); i++)
@@ -247,10 +258,12 @@ namespace uipp::math
     }
 
     template <vector_like T>
+    [[uipp_public]]
     auto operator!=(const T &a, const T &b) -> bool
     { return !(a == b); }
 
     template <vector_like T>
+    [[uipp_public]]
     auto operator<<(std::ostream &os, const T &v) -> std::ostream &
     {
         os << "vec" << T::length() << "(";
@@ -265,6 +278,7 @@ namespace uipp::math
     }
 
     template <vector_like T>
+    [[uipp_public]]
     auto dot(const T &a, const T &b) -> typename T::value_type
     {
         typename T::value_type r {};
@@ -273,22 +287,27 @@ namespace uipp::math
     }
 
     template <arithmetic_type T>
+    [[uipp_public]]
     auto cross(const tvec3<T> &a, const tvec3<T> &b) -> tvec3<T>
     { return tvec3<T>(a.y * b.z - a.z * b.y, a.z * b.x - a.x * b.z, a.x * b.y - a.y * b.x); }
 
     template <float_vector_Like T>
+    [[uipp_public]]
     auto length2(const T &v) -> typename T::value_type
     { return dot(v, v); }
 
     template <float_vector_Like T>
+    [[uipp_public]]
     auto length(const T &v) -> typename T::value_type
     { return std::sqrt(length2(v)); }
 
     template <float_vector_Like T>
+    [[uipp_public]]
     auto distance(const T &a, const T &b) -> typename T::value_type
     { return length(a - b); }
 
     template <float_vector_Like T>
+    [[uipp_public]]
     auto normalize(const T &v) -> T
     {
         auto l = length(v);
@@ -296,10 +315,12 @@ namespace uipp::math
     }
 
     template <float_vector_Like T>
+    [[uipp_public]]
     auto reflect(const T &I, const T &N) -> T
     { return I - N * (typename T::value_type { 2 } * dot(N, I)); }
 
     template <vector_like T>
+    [[uipp_public]]
     auto mix(const T &a, const T &b, typename T::value_type t) -> T
     {
         T out;
@@ -309,6 +330,7 @@ namespace uipp::math
     }
 
     template <vector_like T>
+    [[uipp_public]]
     auto clamp(const T &v, typename T::value_type lo, typename T::value_type hi) -> T
     {
         T out;
@@ -318,6 +340,7 @@ namespace uipp::math
     }
 
     template <vector_like T>
+    [[uipp_public]]
     auto min(const T &a, const T &b) -> T
     {
         T out;
@@ -326,6 +349,7 @@ namespace uipp::math
         return out;
     }
     template <vector_like T>
+    [[uipp_public]]
     auto max(const T &a, const T &b) -> T
     {
         T out;
@@ -334,6 +358,7 @@ namespace uipp::math
         return out;
     }
     template <vector_like T>
+    [[uipp_public]]
     auto abs(const T &v) -> T
     {
         T out;
@@ -343,10 +368,12 @@ namespace uipp::math
     }
 
     template <arithmetic_type T>
+    [[uipp_public]]
     constexpr auto mix(T a, T b, T t) -> T
     { return a + t * (b - a); }
 
     template <arithmetic_type T>
+    [[uipp_public]]
     constexpr auto clamp(T x, T lo, T hi) -> T
     { return std::max(lo, std::min(x, hi)); }
 

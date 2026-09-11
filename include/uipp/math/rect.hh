@@ -5,7 +5,7 @@
 namespace uipp::math
 {
     template <arithmetic_type T>
-    struct trect
+    struct [[uipp_public]] trect
     {
         tvec2<T> position;
         tvec2<T> size;

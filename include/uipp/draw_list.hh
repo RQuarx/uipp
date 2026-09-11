@@ -15,7 +15,7 @@ namespace uipp
     using texture_id = std::uint32_t;
 
 
-    struct cmd_rect
+    struct [[uipp_public]] cmd_rect
     {
         math::rect bounds;
         color      fill;
@@ -23,7 +23,7 @@ namespace uipp
     };
 
 
-    struct cmd_text
+    struct [[uipp_public]] cmd_text
     {
         math::vec2  pos;
         font_id     font;
@@ -33,7 +33,7 @@ namespace uipp
     };
 
 
-    struct cmd_texture
+    struct [[uipp_public]] cmd_texture
     {
         math::rect dst;
         math::rect src_uv; /* 0...1 normalized */
@@ -42,13 +42,13 @@ namespace uipp
     };
 
 
-    struct cmd_push_clip
+    struct [[uipp_public]] cmd_push_clip
     {
         math::rect bounds;
     };
 
 
-    struct cmd_pop_clip
+    struct [[uipp_public]] cmd_pop_clip
     {
     };
 
@@ -56,7 +56,7 @@ namespace uipp
     using draw_command = std::variant<cmd_rect, cmd_text, cmd_texture, cmd_push_clip, cmd_pop_clip>;
 
 
-    class draw_list
+    class [[uipp_public]] draw_list
     {
     public:
         void clear() noexcept;

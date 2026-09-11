@@ -4,6 +4,8 @@
 #include <source_location>
 #include <stdexcept>
 
+#include "uipp/export.hh"
+
 
 namespace uipp
 {
@@ -28,7 +30,7 @@ namespace uipp
     }
 
 
-    class error final : public std::runtime_error
+    class [[uipp_public]] error final : public std::runtime_error
     {
     public:
         template <typename... Args>
@@ -46,6 +48,10 @@ namespace uipp
         [[nodiscard]]
         constexpr auto where() const noexcept -> std::source_location
         { return m_source; }
+
+        [[nodiscard]]
+        constexpr auto unexpected() noexcept -> std::unexpected<error>
+        { return std::unexpected { std::move(*this) }; }
 
     private:
         std::source_location m_source;

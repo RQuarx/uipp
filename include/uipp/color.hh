@@ -2,4 +2,4 @@
 #include "uipp/math/vector.hh"
 
 
-namespace uipp { using color = math::vec4; }
+namespace uipp { using color = math::ivec4; }
